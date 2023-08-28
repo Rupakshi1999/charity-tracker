@@ -1,0 +1,56 @@
+.App {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.charity-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.charity-card:hover {
+  transform: translateY(-5px);
+}
+
+.charity-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.charity-info {
+  flex-grow: 1;
+}
+
+.charity-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.charity-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.charity-link {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.charity-link:hover {
+  color: #0056b3;
+}
