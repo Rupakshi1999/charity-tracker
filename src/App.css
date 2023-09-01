@@ -67,10 +67,12 @@
   padding: 10px 20px;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
+.logo img {
+  max-width: 100%; /* Limit the image's width to the container's width */
+  height: auto; /* Automatically adjust the height to maintain aspect ratio */
+  max-height: 40px;
 }
+
 
 .main-nav ul {
   list-style: none;
@@ -131,4 +133,54 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-bottom: 10px;
+}
+
+/* Primary Button */
+.button-primary {
+  background-color: #ffcc00;;
+  color: #030303;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button-primary:hover {
+  background-color: #f7c911;;
+}
+
+/* Secondary Button */
+.button-secondary {
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.button-secondary:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+.sign-up {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease-in-out;
 }

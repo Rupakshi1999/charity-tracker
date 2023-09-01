@@ -5,9 +5,8 @@ class Login extends React.Component {
     constructor() {
         super()
         this.state = {
-            id: "",
+            username: "",
             password: "",
-            loggedIn: false
         }
         this.onLoginHandler = this.onLoginHandler.bind(this)
         this.onInputFields = this.onInputFields.bind(this)
@@ -19,11 +18,13 @@ class Login extends React.Component {
     }
     onLoginHandler() {
         for (let i = 0; i < users.length; i++) {
-            if (users[i].id === this.state.id) {
-                console.log(users[i].id, this.state.id)
+            if(this.state.username ==="" || this.state.password ===""){
+                break
+            }
+            if (users[i].username === this.state.username && this.state.username) {
+                console.log(users[i].username, this.state.username)
                 if (users[i].password === this.state.password) {
                     console.log(users[i].password, users[i].password)
-                    this.setState({ loggedIn: true })
                     console.log("signed in")
                 }
             }
@@ -38,14 +39,14 @@ class Login extends React.Component {
                     <h2>Login</h2>
                     <form onSubmit={this.onLoginHandler}>
                         <label>
-                            Email:
-                            <input type="text" name="id" value={this.state.id} onChange={this.onInputFields} placeholder="Email"/>
+                            Username:
+                            <input type="text" name="username" value={this.state.username} onChange={this.onInputFields} placeholder="Username"/>
                         </label>
                         <label>
                             Password:
                             <input type="password" name="password" value={this.state.password} onChange={this.onInputFields} placeholder="Password"/>
                         </label>
-                        <button type="submit" onClick={this.onLoginHandler}>Login</button>
+                        <button type="submit">Login</button>
                     </form>
                     <button onClick={this.props.togglepop}>Close</button>
                 </div>
