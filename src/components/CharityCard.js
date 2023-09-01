@@ -1,13 +1,13 @@
 function CharityCard(props) {
     return (
-        <div class="charity-card">
-            <img class="charity-logo" src={props.charityinfo.logo} alt="Charity Logo"/>
-                <div class="charity-info">
-                    <div class="charity-name">{props.charityinfo.name}</div>
-                    <div class="charity-description">
-                        {props.charityinfo.shortdescription}
+        <div className="charity-card">
+            <img className="charity-logo" src={props.logo} alt="Charity Logo"/>
+                <div className="charity-info">
+                    <div className="charity-name">{props.name}</div>
+                    <div className="charity-description">
+                        {props.shortdescription}
                     </div>
-                    <a class="charity-link" href={props.charityinfo.link}>Learn More</a>
+                    <a className="charity-link" href={props.link}>Learn More</a>
                 </div>
         </div>
     )
