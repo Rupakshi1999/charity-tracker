@@ -17,6 +17,7 @@ class Header extends React.Component {
   }
 
   togglepop() {
+    console.log("toggle pop called")
     this.setState(prevState => {
       if (prevState.toggleloginWindow) {
         return { toggleloginWindow: false }
@@ -43,7 +44,7 @@ class Header extends React.Component {
       <header className="site-header">
         <div className="logo">
           <Link to="/">
-            <img src={mylogo} alt="Logo Fruit Platter"  />
+            <img src={mylogo} alt="Logo Fruit Platter" />
           </Link>
         </div>
         <nav className="main-nav">
@@ -54,7 +55,8 @@ class Header extends React.Component {
             </li>
             {/* Only show this if someone is not logged in */}
             <li>
-              <Link to="/signup">Sign Up</Link></li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
             <li>
               {/* Only show this if someone is logged in */}
               <button onClick={this.toggleDonationForm}>Donation</button>

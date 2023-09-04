@@ -1,60 +1,117 @@
-import React, {useState} from 'react'
- import { Formik } from 'formik';
+import React from 'react'
+import { Formik, Form, Field, ErrorMessage } from "formik";
 // Use formick with class components
 
-class SignUp extends React.Component {
-    constructor(){
-        super()
-        this.state = {
-            username:"",
-            email:"",
-            password:"",
-            confirmpassword:""
+function SignUp() {
+
+    function initialValues() {
+        return {
+            email: "",
+            username: "",
+            password: "",
+            confirmPassword: ""
         }
-        this.onInputFields = this.onInputFields.bind(this)
     }
 
-    onInputFields(event) {
-        const { name, value } = event.target
-        this.setState({ [name]: value })
+    function validate(values) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        const usernameRegex = /^[a-zA-Z0-9]+$/;
+        let errors = {};
+
+        if (values.username === "") {
+            errors.username = "username is missing";
+        } else if (!usernameRegex.test(values.username)) {
+            errors.username = "username must only contain characters and numbers";
+        } else if (values.username.length > 25) {
+            errors.password = "username length must be less than 25 characters";
+        }
+
+        if (values.email === "") {
+            errors.email = "Email is missing";
+        } else if (!emailRegex.test(values.email)) {
+            errors.email = "Invalid email";
+        }
+        if (values.password === "") {
+            errors.password = "Password is missing";
+        } else if (values.password.length < 6) {
+            errors.password = "Password must be 6 characters at minimum";
+        }
+        if (values.confirmpassword === "") {
+            errors.confirmPassword = "Confirm Password is missing";
+        } else if (values.confirmpassword !== values.password) {
+            errors.confirmPassword = "Confirm Password must match passport";
+        }
+        return errors;
     }
 
-    submitSignUp() {
-        console.log("form submitted")
+    function submitSignUp(data) {
+        console.log(data);
     }
-
-
-    render() {
-        return (
-            <div className="sign-up">
-                <form onSubmit={this.submitSignUp}>
-                    <label>
-                        Email:
-                        <input type="text" name="email" value={this.state.email} onChange={this.onInputFields} placeholder="Email" />
-                    </label>
-                    <br></br>
-                    <label>
-                        User name:
-                        <input type="text" name="username" value={this.state.username} onChange={this.onInputFields} placeholder="User name" />
-                    </label>
-                    <br></br>
-                    <label>
-                        Password:
-                        <input type="password" name="password" value={this.state.password} onChange={this.onInputFields} placeholder="Password" />
-                    </label>
-                    <br></br>
-                    <label>
-                        Confirm:
-                        <input type="password" name="confirmPassword" value={this.state.confirmpassword} onChange={this.onInputFields} placeholder="Confirm Password" />
-                    </label>
-                    <br></br>
-                    <label>
-                    <button type="submit" className="button-primary">Sign Up</button>
-                    </label>
-                </form>
-            </div>
-        )
-    }
+    return (
+        <div className="sign-up">
+            <Formik
+                initialValues={initialValues()}
+                validate={validate.bind(this)}>
+                {
+                    props => (
+                        <Form onSubmit={submitSignUp}>
+                            <div>
+                                <label>
+                                    Email:
+                                </label>
+                                <Field type="text" name="email" placeholder="Email" />
+                                <ErrorMessage
+                                    component="div"
+                                    name="email"
+                                    className="invalid-feedback"
+                                />
+                            </div>
+                            <br></br>
+                            <div>
+                                <label>
+                                    User name:
+                                </label>
+                                <Field type="text" name="username" placeholder="User name" />
+                                <ErrorMessage
+                                    component="div"
+                                    name="username"
+                                    className="invalid-feedback"
+                                />
+                            </div>
+                            <br></br>
+                            <div>
+                                <label>
+                                    Password:
+                                </label>
+                                <Field type="password" name="password" placeholder="Password" />
+                                <ErrorMessage
+                                    component="div"
+                                    name="password"
+                                    className="invalid-feedback"
+                                />
+                            </div>
+                            <br></br>
+                            <div>
+                                <label>
+                                    Confirm:
+                                </label>
+                                <Field type="password" name="confirmPassword" placeholder="Confirm Password" />
+                                <ErrorMessage
+                                    component="div"
+                                    name="confirmPassword"
+                                    className="invalid-feedback"
+                                />
+                            </div>
+                            <br></br>
+                            <label>
+                                <button type="submit" className="button-primary">Sign Up</button>
+                            </label>
+                        </Form>
+                    )
+                }
+            </Formik>
+        </div>
+    )
 }
 
 export default SignUp

@@ -1,58 +1,92 @@
 import React from "react"
 import users from "../Users"
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
-class Login extends React.Component {
-    constructor() {
-        super()
-        this.state = {
+function Login(props) {
+    function onLoginHandler(data) {
+        // for (let i = 0; i < users.length; i++) {
+        //     if (state.username === "" || state.password === "") {
+        //         break
+        //     }
+        //     if (users[i].username === state.username && state.username) {
+        //         console.log(users[i].username, state.username)
+        //         if (users[i].password === state.password) {
+        //             console.log(users[i].password, users[i].password)
+        //             console.log("signed in")
+        //         }
+        //     }
+        // }
+        console.log(data)
+
+    }
+
+    function initialValues() {
+        return {
             username: "",
-            password: "",
+            password: ""
         }
-        this.onLoginHandler = this.onLoginHandler.bind(this)
-        this.onInputFields = this.onInputFields.bind(this)
     }
 
-    onInputFields(event) {
-        const { name, value } = event.target
-        this.setState({ [name]: value })
-    }
-    onLoginHandler() {
-        for (let i = 0; i < users.length; i++) {
-            if(this.state.username ==="" || this.state.password ===""){
-                break
-            }
-            if (users[i].username === this.state.username && this.state.username) {
-                console.log(users[i].username, this.state.username)
-                if (users[i].password === this.state.password) {
-                    console.log(users[i].password, users[i].password)
-                    console.log("signed in")
-                }
-            }
+    function validate(values) {
+        // const usernameRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        const usernameRegex = /^[a-zA-Z0-9]+$/;
+        let errors = {};
+
+        if (values.username === "") {
+            errors.username = "username is missing";
+        } else if (!usernameRegex.test(values.username)) {
+            errors.username = "username must only contain characters and numbers";
         }
-
+        if (values.password === "") {
+            errors.password = "Password is missing";
+        } else if (values.password.length < 6) {
+            errors.password = "Password must be 6 characters at minimum";
+        }
+        return errors;
     }
 
-    render() {
-        return (
-            <div className="popup">
-                <div className="popup-inner">
-                    <h2>Login</h2>
-                    <form onSubmit={this.onLoginHandler}>
-                        <label>
-                            Username:
-                            <input type="text" name="username" value={this.state.username} onChange={this.onInputFields} placeholder="Username"/>
-                        </label>
-                        <label>
-                            Password:
-                            <input type="password" name="password" value={this.state.password} onChange={this.onInputFields} placeholder="Password"/>
-                        </label>
-                        <button type="submit">Login</button>
-                    </form>
-                    <button onClick={this.props.togglepop}>Close</button>
-                </div>
+    return (
+        <div className="popup">
+            <div className="popup-inner">
+                <h2>Login</h2>
+                <Formik
+                    initialValues={initialValues()}
+                    validate={validate.bind(this)}>
+                    {
+                        props => (
+                            <Form onSubmit={onLoginHandler}>
+                                <div>
+                                    <label>
+                                        Username
+                                    </label>
+                                    <Field type="text" name="username" placeholder="Username" />
+                                    <ErrorMessage
+                                        component="div"
+                                        name="username"
+                                        className="invalid-feedback"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label>
+                                        Password:
+                                    </label>
+                                    <Field type="password" name="password" placeholder="Password" />
+                                    <ErrorMessage
+                                        component="div"
+                                        name="password"
+                                        className="invalid-feedback"
+                                    />
+                                </div>
+                                <button type="submit">Login</button>
+                            </Form>
+                        )
+                    }
+                </Formik>
+                <button onClick={props.togglepop}>Close</button>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default Login
