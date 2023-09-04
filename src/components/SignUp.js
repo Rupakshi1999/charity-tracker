@@ -7,7 +7,35 @@ function SignUp() {
 
     function submitSignUp(data) {
         console.log(data);
-        reset()
+
+        if (data.password === data.confirmPassword) {
+
+            const post_body = {
+                username: data.username,
+                email: data.email,
+                password: data.password
+            }
+            const requestOptions = {
+                method: "POST",
+                headers: {
+                    // specify the type of data we will be sending (check this is what the application input takes in /docs page)
+                    'content-type': 'application/json'
+                },
+                // takes in an js object and makes it a json string
+                body: JSON.stringify(post_body)
+            }
+
+            // the reason we need to add the ip path is maybe because apple is using port 5000 so we can't access localhost:5000
+            fetch('http://127.0.0.1:5000/authorization/signup', requestOptions)
+            .then(res=>res.json())
+            .then(data=>console.log(data))
+            .catch(err=>console.log(err))
+            
+            reset()
+        }
+        else {
+            alert("Passwords do not match")
+        }
     }
     return (
         <div className="sign-up">
