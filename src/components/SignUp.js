@@ -1,115 +1,66 @@
 import React from 'react'
-import { Formik, Form, Field, ErrorMessage } from "formik";
-// Use formick with class components
+import { Link, useActionData } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 function SignUp() {
-
-    function initialValues() {
-        return {
-            email: "",
-            username: "",
-            password: "",
-            confirmPassword: ""
-        }
-    }
-
-    function validate(values) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-        const usernameRegex = /^[a-zA-Z0-9]+$/;
-        let errors = {};
-
-        if (values.username === "") {
-            errors.username = "username is missing";
-        } else if (!usernameRegex.test(values.username)) {
-            errors.username = "username must only contain characters and numbers";
-        } else if (values.username.length > 25) {
-            errors.password = "username length must be less than 25 characters";
-        }
-
-        if (values.email === "") {
-            errors.email = "Email is missing";
-        } else if (!emailRegex.test(values.email)) {
-            errors.email = "Invalid email";
-        }
-        if (values.password === "") {
-            errors.password = "Password is missing";
-        } else if (values.password.length < 6) {
-            errors.password = "Password must be 6 characters at minimum";
-        }
-        if (values.confirmpassword === "") {
-            errors.confirmPassword = "Confirm Password is missing";
-        } else if (values.confirmpassword !== values.password) {
-            errors.confirmPassword = "Confirm Password must match passport";
-        }
-        return errors;
-    }
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     function submitSignUp(data) {
         console.log(data);
+        reset()
     }
     return (
         <div className="sign-up">
-            <Formik
-                initialValues={initialValues()}
-                validate={validate.bind(this)}>
-                {
-                    props => (
-                        <Form onSubmit={submitSignUp}>
-                            <div>
-                                <label>
-                                    Email:
-                                </label>
-                                <Field type="text" name="email" placeholder="Email" />
-                                <ErrorMessage
-                                    component="div"
-                                    name="email"
-                                    className="invalid-feedback"
-                                />
-                            </div>
-                            <br></br>
-                            <div>
-                                <label>
-                                    User name:
-                                </label>
-                                <Field type="text" name="username" placeholder="User name" />
-                                <ErrorMessage
-                                    component="div"
-                                    name="username"
-                                    className="invalid-feedback"
-                                />
-                            </div>
-                            <br></br>
-                            <div>
-                                <label>
-                                    Password:
-                                </label>
-                                <Field type="password" name="password" placeholder="Password" />
-                                <ErrorMessage
-                                    component="div"
-                                    name="password"
-                                    className="invalid-feedback"
-                                />
-                            </div>
-                            <br></br>
-                            <div>
-                                <label>
-                                    Confirm:
-                                </label>
-                                <Field type="password" name="confirmPassword" placeholder="Confirm Password" />
-                                <ErrorMessage
-                                    component="div"
-                                    name="confirmPassword"
-                                    className="invalid-feedback"
-                                />
-                            </div>
-                            <br></br>
-                            <label>
-                                <button type="submit" className="button-primary">Sign Up</button>
-                            </label>
-                        </Form>
-                    )
-                }
-            </Formik>
+            <form>
+                <div>
+                    <label>
+                        Email:
+                    </label>
+                    <input type="text" name="email" placeholder="Email"
+                        {...register("email", { required: true, maxLength: 80 })}
+                    />
+                    {errors.email && <p className="invalid-feedback">Email is required</p>}
+                    {errors.email?.type === "maxLength" && <p className="invalid-feedback">Length must be less than 80</p>}
+                </div>
+                <br></br>
+                <div>
+                    <label>
+                        User name:
+                    </label>
+                    <input type="text" name="username" placeholder="User name"
+                        {...register("username", { required: true, maxLength: 25 })}
+                    />
+                    {errors.username && <p className="invalid-feedback">Username is required</p>}
+                    {errors.username?.type === "maxLength" && <p className="invalid-feedback">Length must be less than 25</p>}
+                </div>
+                <br></br>
+                <div>
+                    <label>
+                        Password:
+                    </label>
+                    <input type="password" name="password" placeholder="Password"
+                        {...register("password", { required: true, minLength: 6 })}
+                    />
+                    {errors.password && <p className="invalid-feedback">Password is required</p>}
+                    {errors.password?.type === "minLength" && <p className="invalid-feedback">Password must be greater than 6</p>}
+                </div>
+                <br></br>
+                <div>
+                    <label>
+                        Confirm:
+                    </label>
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password"
+                        {...register("confirmPassword", { required: true, minLength: 6 })}
+                    />
+                    {errors.confirmPassword && <p className="invalid-feedback">Re-entering the passport is required</p>}
+                    {errors.confirmPassword?.type === "minLength" && <p className="invalid-feedback">Confirm password must be greater than 6</p>}
+                </div>
+                <br></br>
+                <label>
+                    <button className="button-primary" onClick={handleSubmit(submitSignUp)}>Sign Up</button>
+                </label>
+            </form>
+
         </div>
     )
 }
