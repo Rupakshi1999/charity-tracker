@@ -1,13 +1,36 @@
 import React from "react"
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
+import { login, useAuth } from "../authentication";
 
 function Login(props) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const navigate = useNavigate() // redirects user to another page after login
+    const [logged] = useAuth()
 
-    function onLoginHandler(data) {
-        console.log(data)
+    function onLoginHandler(input_data) {
+        console.log("on loging handler invoked", input_data)
+
+        const requestOptions = {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(input_data)
+        }
+
+        fetch('http://127.0.0.1:5000/authorization/login', requestOptions)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data); 
+                login(data.access_token);
+            })
+            .catch(err => console.log(err))
+
+            // navigate programmatically to other pages using navigate
+            navigate('/')
+
         reset()
-
     }
 
     return (
