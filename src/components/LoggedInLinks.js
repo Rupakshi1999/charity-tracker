@@ -38,7 +38,7 @@ class LoggedInLinks extends React.Component {
                         {this.state.toggleDonationForm && <CharityForm togglepop={this.toggleDonationForm} />}
                     </li>
                     <li>
-                        <button href='#' onClick={() => { logout() }}>Log out</button>
+                        <button href='#' onClick={() => { logout(); this.props.logoutRedirect('/');}}>Log out</button>
                     </li>
                 </ul>
             </div>
