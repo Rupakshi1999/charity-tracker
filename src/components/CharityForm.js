@@ -47,7 +47,7 @@ class CharityForm extends React.Component {
                                 placeholder="link to the charity"
                                 name="link"
                                 value={this.state.link}
-                                nChange={this.handleChange} />
+                                onChange={this.handleChange} />
                             <br />
 
                             <br />

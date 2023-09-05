@@ -8,7 +8,7 @@ function Login(props) {
     const navigate = useNavigate() // redirects user to another page after login
 
     function onLoginHandler(data) {
-        console.log(data)
+        console.log("on loging handler invoked", data)
 
         const requestOptions = {
             method: "POST",
@@ -25,7 +25,7 @@ function Login(props) {
 
             login(data.access_token)
             // navigate programmatically to other pages using navigate
-            navigate('/')
+            navigate('/mydonations')
 
         reset()
     }
