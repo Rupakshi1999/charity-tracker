@@ -16,7 +16,6 @@ const Header = () => {
         </Link>
       </div>
       <nav className="main-nav">
-        {console.log("................................logged in? ", logged)}
         {logged ? <LoggedInLinks /> : <LoggedOutLinks />
         }
       </nav>
