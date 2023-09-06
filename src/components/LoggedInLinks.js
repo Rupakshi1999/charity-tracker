@@ -1,6 +1,5 @@
 import React from "react"
-import CharityForm from "./CharityForm"
-import MyDonations from "./MyDonations"
+import AddDonation from "./AddDonation"
 import { Link } from "react-router-dom"
 import { logout } from "../authentication"
 
@@ -35,10 +34,10 @@ class LoggedInLinks extends React.Component {
                     <li>
                         {/* Only show this if someone is logged in */}
                         <button onClick={this.toggleDonationForm}>Add Donation</button>
-                        {this.state.toggleDonationForm && <CharityForm togglepop={this.toggleDonationForm} />}
+                        {this.state.toggleDonationForm && <AddDonation togglepop={this.toggleDonationForm} />}
                     </li>
                     <li>
-                        <button href='#' onClick={() => { logout(); this.props.logoutRedirect('/');}}>Log out</button>
+                        <button href='#' onClick={() => { logout(); this.props.logoutRedirect('/'); }}>Log out</button>
                     </li>
                 </ul>
             </div>

@@ -190,3 +190,41 @@
   font-size: 14px; /* Adjust the font size as needed */
   margin-top: 5px; /* Add spacing between the field and the feedback */
 }
+
+/* track donations */
+.user-donation-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.charity-name a {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 5px;
+}
+
+.donation-amount {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 5px;
+}
+
+.donation-date {
+  font-size: 14px;
+  color: #999;
+  margin-top: 5px;
+}
+
+.motivation-story {
+  font-size: 16px;
+  color: #333;
+  margin-top: 10px;
+}

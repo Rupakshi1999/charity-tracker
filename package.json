@@ -14,7 +14,7 @@
     "react-token-auth": "^2.3.8",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:4999",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
