@@ -4,7 +4,7 @@ import { createAuthProvider } from 'react-token-auth'
 export const {useAuth, authFetch, login, logout} = createAuthProvider({
     getAccessToken: 'access_token',
     storage: localStorage,
-    onUpdateToken: (token) => fetch('http://127.0.0.1:5000/authorization/refresh',
+    onUpdateToken: (token) => fetch('http://127.0.0.1:4999/authorization/refresh',
         {
             method: 'POST',
             body: token.refresh_token

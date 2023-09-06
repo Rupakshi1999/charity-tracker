@@ -7,17 +7,7 @@ import SignUp from './components/SignUp';
 import Login from './components/UserLogin';
 import MyDonations from './components/MyDonations'
 
-// import { useEffect } from 'react';
-
 function App() {
-  // useEffect(
-  //   ()=>{
-  //     fetch('http://127.0.0.1:5000/recipe/hello')
-  //     .then((response=>{console.log(response); return response.json()}))
-  //     .then(data=>console.log(data))
-  //     .catch(err=>console.log(err))
-  //   },[]
-  // )
 
   const CharityComponents = charities.map(
     charity => <

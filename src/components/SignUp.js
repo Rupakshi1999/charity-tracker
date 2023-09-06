@@ -26,7 +26,7 @@ function SignUp() {
             }
 
             // the reason we need to add the ip path is maybe because apple is using port 5000 so we can't access localhost:5000
-            fetch('http://127.0.0.1:5000/authorization/signup', requestOptions)
+            fetch('http://127.0.0.1:4999/authorization/signup', requestOptions)
             .then(res=>res.json())
             .then(data=>console.log(data))
             .catch(err=>console.log(err))
@@ -45,20 +45,22 @@ function SignUp() {
                         Email:
                     </label>
                     <input type="text" name="email" placeholder="Email"
-                        {...register("email", { required: true, maxLength: 80 })}
+                        {...register("email", { required: true, maxLength: 80, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i  })}
                     />
                     {errors.email && <p className="invalid-feedback">Email is required</p>}
+                    {errors.email?.type === "pattern" && <p className="invalid-feedback">Not a valid email format</p>}
                     {errors.email?.type === "maxLength" && <p className="invalid-feedback">Length must be less than 80</p>}
                 </div>
                 <br></br>
                 <div>
                     <label>
-                        User name:
+                        Username:
                     </label>
                     <input type="text" name="username" placeholder="User name"
-                        {...register("username", { required: true, maxLength: 25 })}
+                        {...register("username", { required: true, maxLength: 25, pattern: /^[a-zA-Z0-9]+$/ })}
                     />
                     {errors.username && <p className="invalid-feedback">Username is required</p>}
+                    {errors.username?.type === "pattern" && <p className="invalid-feedback">Username must only contain characters and numbers</p>}
                     {errors.username?.type === "maxLength" && <p className="invalid-feedback">Length must be less than 25</p>}
                 </div>
                 <br></br>
